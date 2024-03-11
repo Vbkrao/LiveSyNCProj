@@ -11,7 +11,7 @@ const useWindowSize=()=>{
         width:undefined,
         height:undefined,
     });
-
+  
     const [widthStr,setWidthStr]=useState('')
     const [heightStr,setHeightStr]=useState('')
     const [isMobileWidth,setIsMobileWidth]=useState(true);

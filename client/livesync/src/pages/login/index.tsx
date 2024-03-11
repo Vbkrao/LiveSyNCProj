@@ -1,8 +1,29 @@
+import { useState } from "react";
 import useWindowSize from "../../hooks/use-window-size";
-
+import validator from "validator";
 const Login=()=>{
 
 const {widthStr,heightStr}=useWindowSize();
+const [email,setEmail]=useState("");
+const [emailErrors,setEmailErrors]=useState<Array<string>>([]);
+const [password,setPassword]=useState("");
+const [passwordErrors,setPasswordErrors]=useState<Array<string>>([]);
+
+const validate=()=>{
+    setEmailErrors([])
+    setPasswordErrors([])
+    let isValid=true;
+
+    if(!validator.isEmail(email)){
+        setEmailErrors(['Must enter a valid email'])
+        isValid=false
+    }
+    if(!password.length){
+        setPasswordErrors(['Must enter a password'])
+    }
+
+    return isValid;
+}
 return(
     <div className="w-full flex flex-col sm:justify-center items-center p-6 sm:pb-96 bg-gray-100 dark:bg-slate-900 text-primary" style={{width:widthStr,height:heightStr}}>
        <div className="w-full max-w-sm bg-white dark:bg-slate-800 rounded border-primary shadow-md border dark:border-0 dark:shadow-xl p-6">
