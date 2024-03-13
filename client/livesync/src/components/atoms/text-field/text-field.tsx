@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import InputProps from "../../../types/interfaces/input";
 import InputMask from 'inputmask';
+import {EyeIcon,EyeOffIcon} from "@heroicons/react/outline";
+import {ExclamationCircleIcon} from "@heroicons/react/solid";
+import Errors from "../errors";
 interface TextFieldProps extends InputProps{
     value?:string | number;
     onInput?:Function
@@ -49,11 +52,41 @@ const TextField=({
              </div>
              {type!=='textarea'?(
                <div className="w-full flex justify-between items-center">
-                <input ref={textFieldRef} type={type!=='password'?type:showPassword?'text':type} />
-               </div>
-             )}
-            </div>
+                <input ref={textFieldRef} type={type!=='password'?type:showPassword?'text':type}
+                onInput={((e)=>onInput(e.target as HTMLTextAreaElement).value)}
+                onBlur={()=>setIsFocused(false)}
+                value={value}
+                className={`${TEXT_FIELD_CLASSES[color]} w-full p-2 rounded`}
+                placeholder={placeholder && placeholder} />
+                {type==='password' &&(
+                    <button tabIndex={-1} onClick={()=>setShowPassword(!showPassword)} className="h-full flex justify-center items-center p-2 text-slate-400">
+                        {showPassword?(
+                            <EyeOffIcon className="w-4 h-4 "/>
 
+                        ):(
+                            <EyeIcon className="h-4 w-4"/>
+                        )}
+                    </button>
+                )}
+               </div>
+             ):(
+                <textarea ref={textFieldRef} onInput={(e)=>onInput((e.target as HTMLTextAreaElement).value)} 
+                onFocus={()=>setIsFocused(true)}
+                onBlur={()=>setIsFocused(false)}
+                placeholder={placeholder && placeholder}
+                value={value}
+                className="w-full p-2 bg-white dark:bg-slate-800 rounded" 
+                />
+             )}
+             {errors.length?(
+                    <div className="pr-2 text-red-500">
+                        <ExclamationCircleIcon className="w-4 h-4"/>
+                    </div>
+                ):null}
+            </div>
+            <Errors errors={errors}/>
         </div>
-    )
+    );
 };
+
+export default TextField;

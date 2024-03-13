@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useWindowSize from "../../hooks/use-window-size";
 import validator from "validator";
+import TextField from "../../components/atoms/text-field";
 const Login=()=>{
 
 const {widthStr,heightStr}=useWindowSize();
@@ -32,8 +33,45 @@ return(
                 <h1>Logo</h1>
                 <h1 className="font-medium text-2xl">Sign in</h1>
                 <p className="font-medium">to continue to docs</p>
-            </div> 
+            </div>
+            <TextField 
+               value="Email"
+               onInput={()=>{}}
+               label="Email"
+               color="secondary"
+               errors={[]}
+            />
+            <p className="text-sm hover:underline font-semibold text-blue-500 text-left">
+                Need an account?- router to register
+            </p>
+            <TextField 
+              value="password"
+              onInput={()=>{}}
+              label="Password"
+              type="password"
+              errors={[]}
+            />
+            <button tabIndex={-1}
+                className="text-sm hover:underline font-semibold text-blue-500 text-left"
+                >
+                 Forgot Password?
+            </button>
+            <button 
+              onClick={()=>{}}
+              disabled={false}
+              className="bg-blue-600 text-white text-sm font-semibold px-3 py-2 rounded hover:bg-blue-500 flex justify-center items-center space-x-1 active:ring-1"
+                >
+                <span className="">Login</span>
+            </button>
         </div>
+       </div>
+       <div className="flex justify-center space-x-4 text-sm p-4">
+        <button className="hover:underline font-semibold text-blue-500">
+            Terms
+        </button>
+        <button className="hover:underline font-semibold text-blue-500">
+            Privacy Policy
+        </button>
        </div>
     </div>
 )
