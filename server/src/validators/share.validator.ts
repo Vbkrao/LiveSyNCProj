@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import PermissionEnum from "../types/enums/permission-enum";
 
 
 
