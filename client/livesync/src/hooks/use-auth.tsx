@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth-context";
 import useLocalStorage from "./use-local-storage";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import Token from "../types/interfaces/token";
 import AuthService from "../services/auth-service";
 
@@ -27,7 +27,7 @@ const useAuth = () => {
   );
 
   const login = (accessToken: string, refreshToken: string) => {
-    const { exp, id, email } = jwt_decode<Token>(accessToken);
+    const { exp, id, email } = jwtDecode<Token>(accessToken);
     silentRefresh(exp);
     setUserId(id);
     setEmail(email);

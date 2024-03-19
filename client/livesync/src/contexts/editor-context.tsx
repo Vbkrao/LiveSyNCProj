@@ -58,7 +58,8 @@ interface EditorProviderInterface {
 }
 
 const DEFAULT_SAVE_TIME = 1500;
-let saveInterval: null | NodeJS.Timer = null;
+let saveInterval: NodeJS.Timeout | null = null;
+
 
 export const EditorProvider = ({ children }: EditorProviderInterface) => {
   const [editorState, setEditorState] = useState(defaultValues.editorState);

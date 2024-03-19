@@ -1,37 +1,21 @@
-import { useContext } from "react";
-import { EditorContext } from "../../../contexts/editor-context";
-import { EditorState } from "draft-js";
-import IconButton from "../../atoms/icon-button/icon-button";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/outline";
-import FontSelect from "../../atoms/font-select/font-select";
+import { MutableRefObject } from "react";
+import DocumentMenuBar from "../../molecules/document-menu-bar/document-menu-bar";
+import EditorToolbar from "../../molecules/edit-toolbar/edit-toolbar";
 
-const EditorToolbar = () => {
-  const { editorState, setEditorState } = useContext(EditorContext);
+interface DocumentHeaderProps {
+  documentHeaderRef: MutableRefObject<null | HTMLDivElement>;
+}
 
-  const handleUndoBtnClick = () => {
-    setEditorState(EditorState.undo(editorState));
-  };
-
-  const handleRedoBtnClick = () => {
-    setEditorState(EditorState.redo(editorState));
-  };
-
+const DocumentHeader = ({ documentHeaderRef }: DocumentHeaderProps) => {
   return (
-    <div className="w-full h-9 px-3 py-1 flex-shrink-0 flex items-center">
-      <IconButton
-        onClick={handleUndoBtnClick}
-        icon={<ArrowLeftIcon className="h-4 w-4" />}
-        tooltip="Undo"
-      />
-      <IconButton
-        onClick={handleRedoBtnClick}
-        icon={<ArrowRightIcon className="h-4 w-4" />}
-        tooltip="Redo"
-      />
-      <div className="h-5 border-1 border-1-gray-300 mx-2"></div>
-      <FontSelect />
+    <div
+      ref={documentHeaderRef}
+      className="border-b w-full bg-white flex flex-col"
+    >
+      <DocumentMenuBar />
+      <EditorToolbar />
     </div>
   );
 };
 
-export default EditorToolbar;
+export default DocumentHeader;
